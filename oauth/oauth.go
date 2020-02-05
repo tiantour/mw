@@ -42,7 +42,7 @@ func (o *Oauth) Verify(ctx context.Context, method string) (context.Context, err
 	case "ServiceM":
 		return o.do(ctx, 2)
 	default:
-		ctx, nil
+		return ctx, nil
 	}
 }
 
