@@ -3,9 +3,9 @@ package oauth
 import (
 	"context"
 	"errors"
-	"regexp"
 	"strings"
 
+	"gitee.com/tiantour/account/pb/user"
 	"github.com/tiantour/mw/header"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -16,14 +16,7 @@ type (
 	Oauth struct{}
 
 	// User user
-	User struct {
-		Number     int32  `json:"number,omitempty"`     // 编号
-		Name       string `json:"name,omitempty"`       // 名称
-		Avatar     string `json:"avatar,omitempty"`     // 头像
-		Gender     int32  `json:"gender,omitempty"`     // 性别
-		Permission int32  `json:"permission,omitempty"` // 权限
-		Token      string `json:"token,omitempty"`      // 令牌
-	}
+	User user.User
 )
 
 // NewOauth new oauth
@@ -33,17 +26,15 @@ func NewOauth() *Oauth {
 
 // Verify oauth verify
 func (o *Oauth) Verify(ctx context.Context, method string) (context.Context, error) {
-	reg := regexp.MustCompile("Service[A-Z]")
-	switch reg.FindString(method) {
-	case "ServiceF":
-		return ctx, nil
-	case "ServiceU":
-		return o.do(ctx, 0)
-	case "ServiceM":
-		return o.do(ctx, 2)
-	default:
-		return ctx, nil
+	if ctx.Err() == context.Canceled {
+		return nil, ctx.Err()
 	}
+	if strings.HasSuffix(method, "ServiceU") {
+		return o.do(ctx, 0)
+	} else if strings.HasSuffix(method, "ServiceM") {
+		return o.do(ctx, 2)
+	}
+	return ctx, nil
 }
 
 // do oauth do
