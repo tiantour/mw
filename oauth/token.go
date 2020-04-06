@@ -3,6 +3,7 @@ package oauth
 import (
 	"errors"
 
+	"gitee.com/tiantour/account/pb/user"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/tiantour/conf"
 	"github.com/tiantour/tempo"
@@ -14,7 +15,7 @@ type (
 
 	// Claims claims
 	Claims struct {
-		*User
+		*user.User
 		jwt.StandardClaims
 	}
 )
@@ -27,7 +28,7 @@ func NewToken() *Token {
 // Set set user to jwt token
 // date 2016-12-17
 // author andy.jiang
-func (t *Token) Set(data *User) (*User, error) {
+func (t *Token) Set(data *user.User) (*user.User, error) {
 	body := jwt.NewWithClaims(jwt.SigningMethodHS256, Claims{
 		data,
 		jwt.StandardClaims{
@@ -48,7 +49,7 @@ func (t *Token) Set(data *User) (*User, error) {
 // Get get user for jwt token
 // date 2016-12-17
 // author andy.jiang
-func (t *Token) Get(sign string) (*User, error) {
+func (t *Token) Get(sign string) (*user.User, error) {
 	token, err := jwt.ParseWithClaims(sign, &Claims{},
 		func(token *jwt.Token) (interface{}, error) {
 			secret := []byte(conf.NewToken().Data.Secret)

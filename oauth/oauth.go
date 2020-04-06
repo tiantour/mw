@@ -5,19 +5,13 @@ import (
 	"errors"
 	"strings"
 
-	"gitee.com/tiantour/account/pb/user"
 	"github.com/tiantour/mw/header"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 )
 
-type (
-	// Oauth oauth
-	Oauth struct{}
-
-	// User user
-	User user.User
-)
+// Oauth oauth
+type Oauth struct{}
 
 // NewOauth new oauth
 func NewOauth() *Oauth {
