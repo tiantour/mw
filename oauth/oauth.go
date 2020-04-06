@@ -3,7 +3,6 @@ package oauth
 import (
 	"context"
 	"errors"
-	"fmt"
 	"strings"
 
 	"github.com/tiantour/mw/header"
@@ -21,17 +20,12 @@ func NewOauth() *Oauth {
 
 // Verify oauth verify
 func (o *Oauth) Verify(ctx context.Context, method string) (context.Context, error) {
-	fmt.Println(0, ctx, method)
 	if ctx.Err() == context.Canceled {
-		fmt.Println(1, "err")
-
 		return nil, ctx.Err()
 	}
-	if strings.HasSuffix(method, "ServiceU") {
-		fmt.Println(2, "u")
+	if strings.Contains(method, "ServiceU") {
 		return o.do(ctx, 0)
-	} else if strings.HasSuffix(method, "ServiceM") {
-		fmt.Println(3, "m")
+	} else if strings.Contains(method, "ServiceM") {
 		return o.do(ctx, 2)
 	}
 	return ctx, nil
