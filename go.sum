@@ -1,6 +1,8 @@
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 gitee.com/tiantour/account v1.1.3 h1:OTpNpIcr0uKug7QdT5QZOGgjB9GMacrtgiKGYJclOws=
 gitee.com/tiantour/account v1.1.3/go.mod h1:oYZf/KfZ3s2Ysz9Eei2YhYwVSrM2ThGdASwEpERl0kg=
+gitee.com/tiantour/account v1.1.6 h1:ennh3inwtFckedauYIcVPfhIHUeGOBhrBWiIfdZTipM=
+gitee.com/tiantour/account v1.1.6/go.mod h1:AQbdqs/OzmdzyNjio89nS7QNn7aBjZ0Hty/D9a1kvRg=
 github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/antihax/optional v0.0.0-20180407024304-ca021399b1a6/go.mod h1:V8iCPQYkqmusNa815XgQio277wI47sdRh1dUOLdyC6Q=
@@ -17,6 +19,7 @@ github.com/envoyproxy/protoc-gen-validate v0.1.0/go.mod h1:iSmxcyjqTsJpI2R4NaDN7
 github.com/ghodss/yaml v1.0.0/go.mod h1:4dBDuWmgqj2HViK6kFavaiC9ZROes6MMH2rRYeMEF04=
 github.com/go-sql-driver/mysql v1.4.0/go.mod h1:zAC/RDZ24gD3HViQzih4MyKcchzm+sOG5ZlKdlhCg5w=
 github.com/go-sql-driver/mysql v1.4.1/go.mod h1:zAC/RDZ24gD3HViQzih4MyKcchzm+sOG5ZlKdlhCg5w=
+github.com/go-sql-driver/mysql v1.5.0/go.mod h1:DCzpHaOWr8IXmIStZouvnhqoel9Qv2LBy8hT2VhHyBg=
 github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b/go.mod h1:SBH7ygxi8pfUlaOkMMuAQtPIUF8ecWP5IEl/CR7VP2Q=
 github.com/golang/mock v1.1.1/go.mod h1:oTYuIxOrZwtPieC+H1uAHpcLFnEyAGVDL/k47Jfbm0A=
 github.com/golang/protobuf v1.2.0/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
@@ -40,16 +43,19 @@ github.com/rogpeppe/fastuuid v1.2.0/go.mod h1:jVj6XXZzXRy/MSR5jhDC/2q6DgLz+nrA6L
 github.com/rs/cors v1.7.0/go.mod h1:gFx+x8UowdsKA9AchylcLynDq+nNFfI8FkUZdN/jGCU=
 github.com/stretchr/testify v1.2.2/go.mod h1:a8OnRcib4nhh0OaRAV+Yts87kKdq0PP7pXfy6kDkUVs=
 github.com/tiantour/cache v1.0.1/go.mod h1:96jPnxtM7bKxo3FDlH3y5/KWAQ+ua10NfdfoOOkTKtE=
+github.com/tiantour/cache v1.0.3/go.mod h1:40Yz891MvUn1J6l0nEODdK1zlI+cE/rHTOTqSXniD7k=
 github.com/tiantour/conf v1.0.0/go.mod h1:oopD0jGktJPIODpJ/MlNSp8olNGgyzZjmI/VTcgAwiI=
 github.com/tiantour/conf v1.2.5/go.mod h1:oopD0jGktJPIODpJ/MlNSp8olNGgyzZjmI/VTcgAwiI=
 github.com/tiantour/conf v1.3.0/go.mod h1:JUe3gGsBp/A8ioHbsdMPEsxouYHcWAX16GeHSmfd7BU=
 github.com/tiantour/conf v1.5.1 h1:SmqDaVEaytT7Rlpo9OLqMSrRulvQYQOxZWzNam3rUIY=
 github.com/tiantour/conf v1.5.1/go.mod h1:Qe1Fs5sY3xsrKSh9NhnHCh7qR4T9/XIM6/E7LRbC7CE=
 github.com/tiantour/db v1.0.0/go.mod h1:EwZDUpR3iRRetYj4S2MqlYRq/TgPssIrh0HbM1feCso=
+github.com/tiantour/db v1.0.1/go.mod h1:x6YbwlFmr/a/u0F8APaJBUvVMSUN3q5jtjknwL1+Lgs=
 github.com/tiantour/fetch v1.0.3/go.mod h1:5oOFK9vdQPGe7AWAajWl6j1yWNju/HAuLmENMv/0U6c=
 github.com/tiantour/image v1.0.3/go.mod h1:+njXlwH56fIpWxLEOhkKGLGE0aIJm4j+E5LhFLazIqs=
 github.com/tiantour/imago v1.0.0/go.mod h1:MNnDnzf12C+kzGFcpdtmOpnqmvOZJprm5lgvCE8XMh0=
 github.com/tiantour/mw v1.0.1/go.mod h1:5GhxntnXEGavN0uQ/JFx3v3K8Aqr/4bacEvVpw/utS0=
+github.com/tiantour/mw v1.0.5/go.mod h1:ocl9f6LWCyIvLEZ/UsaRRrdWQ+ALkFrzu6I5Kynk6e8=
 github.com/tiantour/rsae v1.0.3/go.mod h1:2gGojE6j5F/prpRpXKwQ6QqjZ906szDPlj/YaR99Uh8=
 github.com/tiantour/tempo v1.0.0 h1:aPpCr2OK0MC5sAXBTvD5lAkcoOXmg774214R6mrk1Pk=
 github.com/tiantour/tempo v1.0.0/go.mod h1:6ZCTMOdajmfAybGgdEIZf9h66H9GzekJfPq8sXuf0b4=
@@ -90,6 +96,7 @@ google.golang.org/genproto v0.0.0-20190819201941-24fa4b261c55/go.mod h1:DMBHOl98
 google.golang.org/genproto v0.0.0-20190927181202-20e1ac93f88c/go.mod h1:IbNlFCBrqXvoKpeg0TB2l7cyZUmoaFKYIwrEpbDKLA8=
 google.golang.org/genproto v0.0.0-20200326112834-f447254575fd h1:DVCc2PgW9UrvHGZGEv4Mt3uSeQtUrrs7r8pUw+bVwWI=
 google.golang.org/genproto v0.0.0-20200326112834-f447254575fd/go.mod h1:55QSHmfGQM9UVYDPBsyGGes0y52j32PQ3BqQfXhyH3c=
+google.golang.org/genproto v0.0.0-20200403120447-c50568487044/go.mod h1:55QSHmfGQM9UVYDPBsyGGes0y52j32PQ3BqQfXhyH3c=
 google.golang.org/grpc v1.19.0/go.mod h1:mqu4LbDTu4XGKhr4mRzUsmM4RtVoemTSY81AxZiDr8c=
 google.golang.org/grpc v1.23.0/go.mod h1:Y5yQAOtifL1yxbo5wqy6BxZv8vAUGQwXBOALyacEbxg=
 google.golang.org/grpc v1.24.0/go.mod h1:XDChyiUovWa60DnaeDeZmSW86xtLtjtZbwvSiRnRtcA=
@@ -97,6 +104,8 @@ google.golang.org/grpc v1.25.1/go.mod h1:c3i+UQWmh7LiEpx4sFZnkU36qjEYZ0imhYfXVyQ
 google.golang.org/grpc v1.27.0/go.mod h1:qbnxyOmOxrQa7FizSgH+ReBfzJrCY1pSN7KXBS8abTk=
 google.golang.org/grpc v1.28.0 h1:bO/TA4OxCOummhSf10siHuG7vJOiwh7SpRpFZDkOgl4=
 google.golang.org/grpc v1.28.0/go.mod h1:rpkK4SK4GF4Ach/+MFLZUBavHOvF2JJB5uozKKal+60=
+google.golang.org/grpc v1.28.1 h1:C1QC6KzgSiLyBabDi87BbjaGreoRgGUF5nOyvfrAZ1k=
+google.golang.org/grpc v1.28.1/go.mod h1:rpkK4SK4GF4Ach/+MFLZUBavHOvF2JJB5uozKKal+60=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/yaml.v2 v2.2.3/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
 honnef.co/go/tools v0.0.0-20190102054323-c2f93a96b099/go.mod h1:rf3lG4BRIbNafJWhAfAdb/ePZxsR/4RtNHQocxwk9r4=
