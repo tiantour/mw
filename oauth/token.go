@@ -40,7 +40,7 @@ func (t *Token) Set(data *user.User) (*user.User, error) {
 	secret := []byte(conf.NewToken().Data.Secret)
 	token, err := body.SignedString(secret)
 	if err != nil {
-		return data, err
+		return nil, err
 	}
 	data.Token = token
 	return data, nil

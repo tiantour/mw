@@ -20,9 +20,6 @@ func NewOauth() *Oauth {
 
 // Verify oauth verify
 func (o *Oauth) Verify(ctx context.Context, method string) (context.Context, error) {
-	if ctx.Err() == context.Canceled {
-		return nil, ctx.Err()
-	}
 	if strings.Contains(method, "ServiceU") {
 		return o.do(ctx, 0)
 	} else if strings.Contains(method, "ServiceM") {

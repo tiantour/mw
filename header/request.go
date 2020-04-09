@@ -26,25 +26,16 @@ func (r *Request) IP(ctx context.Context) string {
 
 // Authorization get request authorization
 func (r *Request) Authorization(ctx context.Context) string {
-	if s := r.Get(ctx, "grpcgateway-authorization"); s != "" {
-		return s
-	}
 	return r.Get(ctx, "authorization")
 }
 
 // ContentType get request content-type
 func (r *Request) ContentType(ctx context.Context) string {
-	if s := r.Get(ctx, "grpcgateway-content-type"); s != "" {
-		return s
-	}
 	return r.Get(ctx, "content-type")
 }
 
 // UserAgent get request user-agent
 func (r *Request) UserAgent(ctx context.Context) string {
-	if s := r.Get(ctx, "grpcgateway-user-agent"); s != "" {
-		return s
-	}
 	return r.Get(ctx, "user-agent")
 }
 
