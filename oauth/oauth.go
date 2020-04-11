@@ -21,7 +21,7 @@ func NewOauth() *Oauth {
 
 // Verify oauth verify
 func (o *Oauth) Verify(ctx context.Context, method string) (context.Context, error) {
-	fmt.Println(1, method)
+	fmt.Println(1, method, ctx)
 	if strings.Contains(method, "ServiceU") {
 		return o.do(ctx, 0)
 	} else if strings.Contains(method, "ServiceM") {
