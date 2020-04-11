@@ -43,7 +43,10 @@ func (r *Request) UserAgent(ctx context.Context) string {
 // Get get request metadata
 func (r *Request) Get(ctx context.Context, key string) string {
 	if md, ok := metadata.FromIncomingContext(ctx); ok {
-		fmt.Println("md", md)
+		if value, ok := md[key]; ok {
+			return value[0]
+		}
+		key = fmt.Sprintf("grpcgateway-%s", key)
 		if value, ok := md[key]; ok {
 			return value[0]
 		}
