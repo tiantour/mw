@@ -2,7 +2,6 @@ package interceptor
 
 import (
 	"context"
-	"fmt"
 
 	"google.golang.org/grpc"
 )
@@ -25,7 +24,6 @@ func (u *Unary) Client(nxt Next) grpc.UnaryClientInterceptor {
 // Server unary server
 func (u *Unary) Server(nxt Next) grpc.UnaryServerInterceptor {
 	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
-		fmt.Println(ctx, info.FullMethod)
 		next, err := nxt(ctx, info.FullMethod)
 		if err != nil {
 			return nil, err
