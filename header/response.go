@@ -2,6 +2,7 @@ package header
 
 import (
 	"context"
+	"fmt"
 
 	"google.golang.org/grpc/metadata"
 )
@@ -18,6 +19,7 @@ func NewResponse() *Response {
 func (r *Response) Set(ctx context.Context, kv ...string) context.Context {
 	md := metadata.Pairs(kv...)
 	if outMD, ok := metadata.FromIncomingContext(ctx); ok {
+		fmt.Println("set", outMD)
 		md = metadata.Join(md, outMD)
 	}
 	return metadata.NewOutgoingContext(ctx, md)
