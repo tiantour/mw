@@ -2,7 +2,6 @@ package header
 
 import (
 	"context"
-	"fmt"
 
 	"google.golang.org/grpc/metadata"
 )
@@ -17,10 +16,12 @@ func NewResponse() *Response {
 
 // Set set response metadata
 func (r *Response) Set(ctx context.Context, kv ...string) context.Context {
-	md := metadata.Pairs(kv...)
-	if outMD, ok := metadata.FromIncomingContext(ctx); ok {
-		fmt.Println("set", outMD)
-		md = metadata.Join(md, outMD)
+	omd := metadata.Pairs(kv...)
+	if imd, ok := metadata.FromIncomingContext(ctx); ok {
+		omd = metadata.Join(omd, imd)
 	}
-	return metadata.NewOutgoingContext(ctx, md)
+	if omd.Len() != 0 {
+		return metadata.NewOutgoingContext(ctx, omd)
+	}
+	return ctx
 }
