@@ -9,6 +9,6 @@ var (
 	// CTX grpc context
 	CTX = context.Background()
 
-	// TTL timeout
+	// TTL grpc timeout
 	TTL = time.Second * 5
 )

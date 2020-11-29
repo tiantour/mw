@@ -22,7 +22,7 @@ func (t *Target) Dail(target string) *grpc.ClientConn {
 
 	conn, err := grpc.DialContext(ctx, target, grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("%s did not connect: %v", target, err)
 	}
 	return conn
 }
