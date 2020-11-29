@@ -15,8 +15,8 @@ func NewTarget() *Target {
 	return &Target{}
 }
 
-// Dail target dail
-func (t *Target) Dail(target string) *grpc.ClientConn {
+// Dial target dial
+func (t *Target) Dial(target string) *grpc.ClientConn {
 	ctx, cancel := context.WithTimeout(CTX, TTL)
 	defer cancel()
 
