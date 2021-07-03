@@ -6,8 +6,8 @@ import (
 	"strings"
 
 	"github.com/tiantour/mw/header"
-	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 // Oauth oauth
@@ -23,7 +23,7 @@ func (o *Oauth) Verify(ctx context.Context, method string) (context.Context, err
 	if strings.Contains(method, "ServiceU") {
 		return o.do(ctx, 0)
 	} else if strings.Contains(method, "ServiceM") {
-		return o.do(ctx, 2)
+		return o.do(ctx, 1)
 	}
 	return ctx, nil
 }
@@ -33,15 +33,18 @@ func (o *Oauth) do(ctx context.Context, permission int32) (context.Context, erro
 	token := header.NewRequest().Authorization(ctx)
 	if !strings.HasPrefix(token, "Bearer ") {
 		err := errors.New("令牌缺失")
-		return nil, grpc.Errorf(codes.Unauthenticated, "invalid auth token: %v", err)
+		return nil, status.Errorf(codes.Unauthenticated, "invalid auth token: %v", err)
 	}
 	user, err := NewToken().Get(token[7:])
 	if err != nil {
-		return nil, grpc.Errorf(codes.Unauthenticated, "invalid auth token: %v", err)
+		return nil, status.Errorf(codes.Unauthenticated, "invalid auth token: %v", err)
 	}
 	if user.Permission < permission {
 		err := errors.New("权限不足")
-		return nil, grpc.Errorf(codes.Unauthenticated, "invalid auth token: %v", err)
+		return nil, status.Errorf(codes.Unauthenticated, "invalid auth token: %v", err)
+	}
+	if user.Permission != 0 {
+		user.Number = 110119120
 	}
 	ctx = context.WithValue(ctx, interface{}("user"), user)
 	return ctx, nil
