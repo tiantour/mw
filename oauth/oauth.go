@@ -43,7 +43,7 @@ func (o *Oauth) do(ctx context.Context, permission int32) (context.Context, erro
 		err := errors.New("权限不足")
 		return nil, status.Errorf(codes.Unauthenticated, "invalid auth token: %v", err)
 	}
-	if user.Permission != 0 {
+	if permission != 0 {
 		user.Number = 110119120
 	}
 	ctx = context.WithValue(ctx, interface{}("user"), user)
