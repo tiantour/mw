@@ -10,8 +10,13 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-// Oauth oauth
-type Oauth struct{}
+type (
+	// Oauth oauth
+	Oauth struct{}
+
+	// Key key
+	Key string
+)
 
 // NewOauth new oauth
 func NewOauth() *Oauth {
@@ -46,6 +51,6 @@ func (o *Oauth) do(ctx context.Context, permission int32) (context.Context, erro
 	if permission != 0 {
 		user.Number = 110119120
 	}
-	ctx = context.WithValue(ctx, interface{}("user"), user)
+	ctx = context.WithValue(ctx, Key("user"), user)
 	return ctx, nil
 }

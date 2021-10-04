@@ -2,11 +2,11 @@ package oauth
 
 import (
 	"errors"
+	"time"
 
 	"gitee.com/tiantour/account/pb/user"
-	"github.com/dgrijalva/jwt-go"
+	"github.com/golang-jwt/jwt/v4"
 	"github.com/tiantour/conf"
-	"github.com/tiantour/tempo"
 )
 
 type (
@@ -16,7 +16,7 @@ type (
 	// Claims claims
 	Claims struct {
 		*user.User
-		jwt.StandardClaims
+		jwt.RegisteredClaims
 	}
 )
 
@@ -31,10 +31,12 @@ func NewToken() *Token {
 func (t *Token) Set(data *user.User) (*user.User, error) {
 	body := jwt.NewWithClaims(jwt.SigningMethodHS256, Claims{
 		data,
-		jwt.StandardClaims{
-			Issuer:    conf.NewToken().Data.Issuer,       // 1.1可选，发行者
-			Subject:   data.Token,                        // 1.2可选，主体
-			ExpiresAt: tempo.NewNow().Unix() + 7*24*3600, // 1.4可选，到期时间
+		jwt.RegisteredClaims{
+			Issuer:    conf.NewToken().Data.Issuer,                            // 1.1可选，发行者
+			Subject:   data.Token,                                             // 1.2可选，主体
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(7 * 24 * time.Hour)), // 1.4可选，到期时间
+			IssuedAt:  jwt.NewNumericDate(time.Now()),
+			NotBefore: jwt.NewNumericDate(time.Now()),
 		},
 	})
 	secret := []byte(conf.NewToken().Data.Secret)
@@ -50,12 +52,10 @@ func (t *Token) Set(data *user.User) (*user.User, error) {
 // date 2016-12-17
 // author andy.jiang
 func (t *Token) Get(sign string) (*user.User, error) {
-	token, err := jwt.ParseWithClaims(sign, &Claims{},
-		func(token *jwt.Token) (interface{}, error) {
-			secret := []byte(conf.NewToken().Data.Secret)
-			return secret, nil
-		},
-	)
+	token, err := jwt.ParseWithClaims(sign, &Claims{}, func(token *jwt.Token) (interface{}, error) {
+		secret := conf.NewToken().Data.Secret
+		return []byte(secret), nil
+	})
 	if err != nil {
 		return nil, errors.New("令牌错误")
 	}
