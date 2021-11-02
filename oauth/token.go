@@ -30,14 +30,15 @@ func NewToken() *Token {
 // date 2016-12-17
 // author andy.jiang
 func (t *Token) Set(data *user.User) (*user.User, error) {
+	now := time.Now()
 	body := jwt.NewWithClaims(jwt.SigningMethodHS256, Claims{
 		data,
 		jwt.RegisteredClaims{
-			Issuer:    conf.NewToken().Data.Issuer,                            // 1.1可选，发行者
-			Subject:   data.Token,                                             // 1.2可选，主体
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(7 * 24 * time.Hour)), // 1.4可选，到期时间
-			IssuedAt:  jwt.NewNumericDate(time.Now()),
-			NotBefore: jwt.NewNumericDate(time.Now()),
+			Issuer:    conf.NewToken().Data.Issuer,                     // 1.1可选，发行者
+			Subject:   data.Token,                                      // 1.2可选，主体
+			ExpiresAt: jwt.NewNumericDate(now.Add(7 * 24 * time.Hour)), // 1.4可选，到期时间
+			IssuedAt:  jwt.NewNumericDate(now),
+			NotBefore: jwt.NewNumericDate(now),
 		},
 	})
 	secret := []byte(conf.NewToken().Data.Secret)
