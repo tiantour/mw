@@ -2,7 +2,6 @@ package oauth
 
 import (
 	"errors"
-	"log"
 	"time"
 
 	"gitee.com/tiantour/account/pb/user"
@@ -30,15 +29,14 @@ func NewToken() *Token {
 // date 2016-12-17
 // author andy.jiang
 func (t *Token) Set(data *user.User) (*user.User, error) {
-	now := time.Now()
 	body := jwt.NewWithClaims(jwt.SigningMethodHS256, Claims{
 		data,
 		jwt.RegisteredClaims{
-			Issuer:    conf.NewToken().Data.Issuer,                     // 1.1可选，发行者
-			Subject:   data.Token,                                      // 1.2可选，主体
-			ExpiresAt: jwt.NewNumericDate(now.Add(7 * 24 * time.Hour)), // 1.4可选，到期时间
-			IssuedAt:  jwt.NewNumericDate(now),
-			NotBefore: jwt.NewNumericDate(now),
+			Issuer:    conf.NewToken().Data.Issuer,                            // 1.1可选，发行者
+			Subject:   data.Token,                                             // 1.2可选，主体
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(7 * 24 * time.Hour)), // 1.4可选，到期时间
+			NotBefore: jwt.NewNumericDate(time.Now()),                         // 1.5可选，生效时间
+			IssuedAt:  jwt.NewNumericDate(time.Now()),                         // 1.6可选，发布时间
 		},
 	})
 	secret := []byte(conf.NewToken().Data.Secret)
@@ -59,7 +57,6 @@ func (t *Token) Get(sign string) (*user.User, error) {
 		return []byte(secret), nil
 	})
 	if err != nil {
-		log.Println(err)
 		return nil, errors.New("令牌错误")
 	}
 	data, ok := token.Claims.(*Claims)
