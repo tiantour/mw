@@ -2,6 +2,7 @@ package oauth
 
 import (
 	"errors"
+	"log"
 	"time"
 
 	"gitee.com/tiantour/account/pb/user"
@@ -57,6 +58,7 @@ func (t *Token) Get(sign string) (*user.User, error) {
 		return []byte(secret), nil
 	})
 	if err != nil {
+		log.Println(err)
 		return nil, errors.New("令牌错误")
 	}
 	data, ok := token.Claims.(*Claims)
