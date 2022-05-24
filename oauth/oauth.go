@@ -10,6 +10,11 @@ import (
 	"google.golang.org/grpc/status"
 )
 
+var (
+	Issuer string
+	Secret string
+)
+
 type (
 	// Oauth oauth
 	Oauth struct{}
