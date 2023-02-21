@@ -1,14 +1,11 @@
 package adapter
 
 import (
-	"context"
-	"time"
+	"github.com/tiantour/mw/protector"
+	"google.golang.org/grpc/resolver"
 )
 
-var (
-	// CTX grpc context
-	CTX = context.Background()
-
-	// TTL grpc timeout
-	TTL = time.Second * 5
-)
+func init() {
+	b := protector.NewResolver()
+	resolver.Register(b)
+}

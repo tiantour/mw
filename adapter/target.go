@@ -2,9 +2,12 @@ package adapter
 
 import (
 	"context"
-	"log"
+	"fmt"
+	"time"
 
+	"github.com/tiantour/mw/protector"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 // Target target
@@ -16,13 +19,16 @@ func NewTarget() *Target {
 }
 
 // Dial target dial
-func (t *Target) Dial(target string) *grpc.ClientConn {
-	ctx, cancel := context.WithTimeout(CTX, TTL)
+func (t *Target) Dial(service string) (*grpc.ClientConn, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
 	defer cancel()
 
-	conn, err := grpc.DialContext(ctx, target, grpc.WithInsecure(), grpc.WithBlock())
-	if err != nil {
-		log.Fatalf("%s did not connect: %v", target, err)
-	}
-	return conn
+	target := fmt.Sprintf("%s:///%s", protector.Scheme, service)
+	return grpc.DialContext(
+		ctx,
+		target,
+		grpc.WithBlock(),
+		grpc.WithDefaultServiceConfig(`{"loadBalancingPolicy":"round_robin"}`),
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
+	)
 }

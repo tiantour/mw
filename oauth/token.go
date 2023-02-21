@@ -4,7 +4,6 @@ import (
 	"errors"
 	"time"
 
-	"gitee.com/tiantour/account/pb/user"
 	"github.com/golang-jwt/jwt/v4"
 )
 
@@ -12,9 +11,24 @@ type (
 	// Token token
 	Token struct{}
 
+	// User user
+	User struct {
+		Number     int32  `protobuf:"varint,1,opt,name=number,proto3" json:"number,omitempty"`         // 编号
+		Name       string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`              // 名称
+		Avatar     string `protobuf:"bytes,3,opt,name=avatar,proto3" json:"avatar,omitempty"`          // 头像
+		Gender     int32  `protobuf:"varint,4,opt,name=gender,proto3" json:"gender,omitempty"`         // 性别
+		Action     string `protobuf:"bytes,5,opt,name=action,proto3" json:"action,omitempty"`          // 唯一值
+		Password   string `protobuf:"bytes,6,opt,name=password,proto3" json:"password,omitempty"`      // 密码
+		Device     string `protobuf:"bytes,7,opt,name=device,proto3" json:"device,omitempty"`          // 地域
+		Platform   int32  `protobuf:"varint,8,opt,name=platform,proto3" json:"platform,omitempty"`     // 平台
+		Permission int32  `protobuf:"varint,9,opt,name=permission,proto3" json:"permission,omitempty"` // 权限
+		Extend     string `protobuf:"bytes,10,opt,name=extend,proto3" json:"extend,omitempty"`         // 拓展
+		Time       string `protobuf:"bytes,11,opt,name=time,proto3" json:"time,omitempty"`             // 时间
+		Token      string `protobuf:"bytes,12,opt,name=token,proto3" json:"token,omitempty"`           // 令牌
+	}
 	// Claims claims
 	Claims struct {
-		*user.User
+		*User
 		jwt.RegisteredClaims
 	}
 )
@@ -27,7 +41,7 @@ func NewToken() *Token {
 // Set set user to jwt token
 // date 2016-12-17
 // author andy.jiang
-func (t *Token) Set(data *user.User) (*user.User, error) {
+func (t *Token) Set(data *User) (*User, error) {
 	body := jwt.NewWithClaims(jwt.SigningMethodHS256, Claims{
 		data,
 		jwt.RegisteredClaims{
@@ -50,7 +64,7 @@ func (t *Token) Set(data *user.User) (*user.User, error) {
 // Get get user for jwt token
 // date 2016-12-17
 // author andy.jiang
-func (t *Token) Get(sign string) (*user.User, error) {
+func (t *Token) Get(sign string) (*User, error) {
 	token, err := jwt.ParseWithClaims(sign, &Claims{}, func(token *jwt.Token) (interface{}, error) {
 		return []byte(Secret), nil
 	})
